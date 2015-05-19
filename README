@@ -1,0 +1,6 @@
+# libunified2
+
+This project is a library + tools to read Snort Unified2 log files.
+
+Copyright (c) Victor Roemer, <victor@badsec.org>.
+
