@@ -197,6 +197,7 @@ Unified2Entry * Unified2EntryNew();
 HRESULT Unified2EntrySparseCleanup();
 Unified2 * Unified2New();
 HRESULT Unified2ReadOpenFILE(Unified2 *, char *);
+HRESULT Unified2ReadOpenFILE_2(Unified2 *u2, FILE *file);
 HRESULT Unified2ReadOpenFd(Unified2 *, char *);
 HRESULT Unified2ReadOpenMemory(Unified2 *, void *, int);
 HRESULT Unified2Free(Unified2 *);
