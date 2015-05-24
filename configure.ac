@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT([libunified2], [0.0.6], [vroemer@gmail.com])
+AC_INIT([libunified2], [0.0.7], [https://github.com/wtfbbqhax/libunified2/issues/new])
 AC_CONFIG_SRCDIR([include/unified2.h])
 AC_CONFIG_HEADER([config.h])
 AC_CONFIG_MACRO_DIR([m4])
