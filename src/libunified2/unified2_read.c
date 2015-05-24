@@ -57,8 +57,7 @@
  * Returns:
  *      Unified2RecordHeader *
  */
-Unified2RecordHeader * Unified2ReadRecordHeader(Unified2 *u2)
-{
+Unified2RecordHeader * Unified2ReadRecordHeader(Unified2 *u2) {
     Unified2RecordHeader *record;
     int bytes_read;
 
@@ -97,8 +96,7 @@ Unified2RecordHeader * Unified2ReadRecordHeader(Unified2 *u2)
  * Returns:
  *      Unified2Event *
  */
-Unified2Event * Unified2ReadEvent(Unified2 *u2)
-{
+Unified2Event * Unified2ReadEvent(Unified2 *u2) {
     Unified2Event *event;
     int bytes_read;
 
@@ -125,13 +123,14 @@ Unified2Event * Unified2ReadEvent(Unified2 *u2)
     event->event_id = ntohl(event->event_id);
     event->event_second = ntohl(event->event_second);
     event->event_microsecond = ntohl(event->event_microsecond);
+    //event->event_second = event->event_second;
+    //event->event_microsecond = event->event_microsecond;
+
     event->signature_id = ntohl(event->signature_id);
     event->generator_id = ntohl(event->generator_id);
     event->signature_revision = ntohl(event->signature_revision);
     event->classification_id = ntohl(event->classification_id);
     event->priority_id = ntohl(event->priority_id);
-    event->ip_source = ntohl(event->ip_source);
-    event->ip_destination = ntohl(event->ip_destination);
     event->sport_itype = ntohs(event->sport_itype);
     event->dport_icode = ntohs(event->dport_icode);
     event->protocol = event->protocol;
@@ -152,8 +151,7 @@ Unified2Event * Unified2ReadEvent(Unified2 *u2)
  * Returns:
  *      Unified2Event_v2 *
  */
-Unified2Event_v2 * Unified2ReadEvent_v2(Unified2 *u2)
-{
+Unified2Event_v2 * Unified2ReadEvent_v2(Unified2 *u2) {
     Unified2Event_v2 *event_v2;
     int bytes_read;
 
@@ -180,13 +178,13 @@ Unified2Event_v2 * Unified2ReadEvent_v2(Unified2 *u2)
     event_v2->event_id = ntohl(event_v2->event_id);
     event_v2->event_second = ntohl(event_v2->event_second);
     event_v2->event_microsecond = ntohl(event_v2->event_microsecond);
+    //event_v2->event_second = event_v2->event_second;
+    //event_v2->event_microsecond = event_v2->event_microsecond;
     event_v2->signature_id = ntohl(event_v2->signature_id);
     event_v2->generator_id = ntohl(event_v2->generator_id);
     event_v2->signature_revision = ntohl(event_v2->signature_revision);
     event_v2->classification_id = ntohl(event_v2->classification_id);
     event_v2->priority_id = ntohl(event_v2->priority_id);
-    event_v2->ip_source = ntohl(event_v2->ip_source);
-    event_v2->ip_destination = ntohl(event_v2->ip_destination);
     event_v2->sport_itype = ntohs(event_v2->sport_itype);
     event_v2->dport_icode = ntohs(event_v2->dport_icode);
     event_v2->protocol = event_v2->protocol;
@@ -210,8 +208,7 @@ Unified2Event_v2 * Unified2ReadEvent_v2(Unified2 *u2)
  * Returns:
  *      Unified2Event6 *
  */
-Unified2Event6 * Unified2ReadEvent6(Unified2 *u2)
-{
+Unified2Event6 * Unified2ReadEvent6(Unified2 *u2) {
     Unified2Event6 *event;
     int bytes_read;
 
@@ -265,8 +262,7 @@ Unified2Event6 * Unified2ReadEvent6(Unified2 *u2)
  * Returns:
  *      Unified2Event6_v2 *
  */
-Unified2Event6_v2 * Unified2ReadEvent6_v2(Unified2 *u2)
-{
+Unified2Event6_v2 * Unified2ReadEvent6_v2(Unified2 *u2) {
     Unified2Event6_v2 *event_v2;
     int bytes_read;
 
@@ -298,8 +294,6 @@ Unified2Event6_v2 * Unified2ReadEvent6_v2(Unified2 *u2)
     event_v2->signature_revision = ntohl(event_v2->signature_revision);
     event_v2->classification_id = ntohl(event_v2->classification_id);
     event_v2->priority_id = ntohl(event_v2->priority_id);
-    /*event_v2->ip_source = ntohl(event_v2->ip_source); */
-    /*event_v2->ip_destination = ntohl(event_v2->ip_destination);*/
     event_v2->sport_itype = ntohs(event_v2->sport_itype);
     event_v2->dport_icode = ntohs(event_v2->dport_icode);
     event_v2->protocol = event_v2->protocol;
@@ -323,8 +317,7 @@ Unified2Event6_v2 * Unified2ReadEvent6_v2(Unified2 *u2)
  * Returns:
  *      Unified2Packet *
  */
-Unified2Packet * Unified2ReadPacket(Unified2 *u2)
-{
+Unified2Packet * Unified2ReadPacket(Unified2 *u2) {
     Unified2Packet *packet;
     int bytes_read;
 
@@ -373,8 +366,7 @@ Unified2Packet * Unified2ReadPacket(Unified2 *u2)
  *      I've removed the uint8_t packet_data[4] blob from the Unified2Packet
  *      structure so that this will work the way it should
  */
-void * Unified2ReadPacketData(Unified2 *u2, Unified2Packet *packet)
-{
+void * Unified2ReadPacketData(Unified2 *u2, Unified2Packet *packet) {
     int bytes_read;
     void *packet_data;
 
@@ -415,8 +407,7 @@ void * Unified2ReadPacketData(Unified2 *u2, Unified2Packet *packet)
  * Returns:
  *      void *
  */
-HRESULT Unified2ReadNextEntry(Unified2 *u2, Unified2Entry *entry)
-{
+HRESULT Unified2ReadNextEntry(Unified2 *u2, Unified2Entry *entry) {
     if( u2 == NULL || entry == NULL )
         return UNIFIED2_ERROR;
 
@@ -492,6 +483,9 @@ HRESULT Unified2ReadNextEntry(Unified2 *u2, Unified2Entry *entry)
             Unified2Seek(u2, entry->record->length, SEEK_CUR);
             goto READ_AGAIN;
     }
+
+    if( Unified2Eof(u2) )
+        return UNIFIED2_EOF;
 
     return UNIFIED2_OK;
 }

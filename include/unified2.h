@@ -181,7 +181,7 @@ typedef enum _RECORD_TYPE {
     UNIFIED2_EXTRA_DATA = 110,
 } RECORD_TYPE;
 
-typedef enum _HRESULT {
+typedef enum HRESULT {
     UNIFIED2_ERROR = -1,
     UNIFIED2_OK,
     UNIFIED2_EOF,
@@ -225,9 +225,9 @@ HRESULT Unified2Write(Unified2 *, void *, int);
 HRESULT Unified2WriteRecord(Unified2 *, const Unified2Entry *);
 
 /* unified2_config.c */
-char * unified2_lib_version( );
-char * unified2_lib_string( );
-char * unified2_lib_bugreport( );
+const char * unified2_lib_version( );
+const char * unified2_lib_string( );
+const char * unified2_lib_bugreport( );
 
 /* unified2_print.c */
 HRESULT Unified2PrintRecord(Unified2Entry *entry);

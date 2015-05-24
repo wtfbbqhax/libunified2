@@ -100,10 +100,8 @@ HRESULT Unified2EntrySparseCleanup(Unified2Entry *entry )
         break;
     }
 
-    if( entry->record ) 
-    {
-       free(entry->record);
-    }
+    free(entry->record);
+    entry->record = NULL;
 
     return UNIFIED2_OK;
 }
@@ -175,6 +173,24 @@ HRESULT Unified2ReadOpenFILE(Unified2 *u2, char *filename)
     return UNIFIED2_OK;
 }
 
+HRESULT Unified2ReadOpenFILE_2(Unified2 *u2, FILE *file)
+{
+    if(u2 == NULL)
+    {
+        return UNIFIED2_ERROR;
+    }
+
+    if(file == NULL)
+    {
+        warn("Unified2ReadOpenFILE: failed to open the file %s: %s\n", "stdin", strerror(errno));
+        return UNIFIED2_ERROR;
+    }
+
+    u2->mode = STREAM;
+    u2->fh = file;
+
+    return UNIFIED2_OK;
+}
 /* Function: Unifiled2ReadOpenFd
  *
  * Purpose: Read a Unified2 file from a file descriptor.
@@ -325,6 +341,16 @@ int Unified2Eof(Unified2 *u2) {
     {
         case STREAM:
         r = feof(u2->fh);
+        //r = fread(buf, 4, 1, u2->fh);
+        //if (r == 0)
+        //{
+        //    r = feof(u2->fh);
+        //}
+        //else
+        //{
+        //    r = feof(u2->fh);
+        //    fseek(u2->fh, -4, SEEK_CUR);
+        //}
         break;
 
         case DESCRIPTOR:
