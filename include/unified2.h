@@ -112,10 +112,10 @@ typedef struct _Unified2Packet {
 } Unified2Packet;
 // 28 bytes
 
-typedef struct _Unified2ExtraHdr {
+typedef struct _Unified2ExtraDataHdr {
     uint32_t event_type;
     uint32_t event_length;
-} Unified2ExtraHdr;
+} Unified2ExtraDataHdr;
 // 8 bytes
 
 typedef struct _Unified2ExtraData {
@@ -145,6 +145,7 @@ typedef struct _Unified2Entry {
     Unified2Event6_v2       *event6_v2;
     Unified2Packet          *packet;
     void                    *packet_data;
+    Unified2ExtraData       *extra_data;
 } Unified2Entry;
 
 typedef enum _READ_MODE {

@@ -385,6 +385,28 @@ int Unified2Eof(Unified2 *u2) {
     return r;
 }
 
+static ssize_t
+Read(int fildes, uint8_t * buf, uint32_t nbytes)
+{
+    ssize_t numread;
+    unsigned total = 0;
+
+    do {
+        numread = read(fildes, buf+total, nbytes-total);
+        if (!numread)
+            return 0;
+        else if (numread > 0)
+            total += numread;
+        else if (errno != EINTR && errno != EAGAIN)
+            return -1;
+    } while (total < nbytes);
+
+    if (total < nbytes)
+        return total;
+
+    return total;
+}
+
 /* Function: Unifiled2Read
  *
  * Purpose: Read from the unified2 file
@@ -408,12 +430,7 @@ int Unified2Read(Unified2 *u2, void *buf, int size)
         break;
 
         case DESCRIPTOR:
-        bytes_read = read(u2->fd, buf, size);
-        //if( bytes_read != size ) {
-            //bytes_read += pread(u2->fd, buf, size, 0);
-        //printf("read %d\n",bytes_read);
-        //}
-
+        bytes_read = Read(u2->fd, buf, size);
         break;
 
         case MEMORY:
